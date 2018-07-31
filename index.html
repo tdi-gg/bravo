@@ -1,8 +1,30 @@
 <html>
 <head>
-  <title>github pages test</title>
+	<!-- manifest.json‚ğŒÄ‚Ño‚µ‚Ä‚¢‚Ü‚· -->
+	<link rel="manifest" href="./manifest.json">
+	<script>
+		// service worker‚ª—LŒø‚È‚çAservice-worker.js ‚ğ“o˜^‚µ‚Ü‚·
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('./js/service-worker.js').then(function() { console.log('Service Worker Registered'); });
+		}
+	</script>
+	<link rel="shortcut icon" href="./img/bravo_favicon.png" type="image/png">
+	<link rel="stylesheet" type="text/css" href="./css/jquery.flipcountdown.css" />
+	<link rel="stylesheet" type="text/css" href="./css/bravo.css">
+	<script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="./js/jquery.flipcountdown.js"></script>
+	<title>bravo</title>
 </head>
 <body>
-  <h1>github pages test</h1>
+	<div id="bodyPanel">
+		<div id="graphPanel">
+			<iframe id="lineGraphFrame" src="https://search-devmee-2reme3fl2o4ydkw7rofty55adu.ap-northeast-1.es.amazonaws.com/_plugin/kibana/app/kibana#/visualize/edit/80b248a0-8a29-11e8-b881-fb4bcde56169?embed=true&_g=(refreshInterval%3A('%24%24hashKey'%3A'object%3A356'%2Cdisplay%3A'5%20seconds'%2Cpause%3A!f%2Csection%3A1%2Cvalue%3A5000)%2Ctime%3A(from%3Anow-6m%2Cmode%3Arelative%2Cto%3Anow))"></iframe>
+			<iframe id="audieceGraphPanel" src="https://search-devmee-2reme3fl2o4ydkw7rofty55adu.ap-northeast-1.es.amazonaws.com/_plugin/kibana/app/kibana#/visualize/edit/f73c0b40-8f16-11e8-b881-fb4bcde56169?embed=true&_g=(refreshInterval%3A('%24%24hashKey'%3A'object%3A356'%2Cdisplay%3A'5%20seconds'%2Cpause%3A!f%2Csection%3A1%2Cvalue%3A5000)%2Ctime%3A(from%3Anow-6m%2Cmode%3Arelative%2Cto%3Anow))"></iframe>
+		</div>
+		<div id="clockPanel">
+			<div id="clock"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="./js/bravo.js"></script>
 </body>
 </html>
