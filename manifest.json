@@ -1,0 +1,16 @@
+{
+  "name": "bravo",
+  "short_name": "bravo",
+  "background_color": "#fc980c",
+  "icons": [{
+      "src": "./img/bravo_256-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },{
+      "src": "./img/bravo_192-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }],
+  "start_url": "./?utm_source=homescreen",
+  "display": "standalone"
+}
