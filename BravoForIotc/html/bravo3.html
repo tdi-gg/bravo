@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>bravo</title>
+<link rel="stylesheet" type="text/css" href="../css/bravo3.css">
+<link rel="stylesheet" type="text/css" href="../css/windowutil.css">
+<script src="../js/jquery-3.0.0.min.js"></script>
+<script src="../js/anime.js"></script>
+<script src="../js/windowutil.js"></script>
+<script src="../js/bravo3.js"></script>
+</head>
+<body>
+<span id="bravoPanel">
+	<!-- アニメーション描画領域 -->
+	<canvas id="c"></canvas>
+	<span class="bravo-text"><span>BRAVO!!</span></span>
+	<!-- スピーカー選択 -->
+	<span id="chooseSpeakerPanel">
+		<span class="p">Select</span>
+		<span class="dropdown">
+			<span class="p"><i class="fa fa-foursquare"></i> Please Rate</span>
+		</span>
+		<ul class="menu">
+			<li><i class="fa fa-thumbs-down"></i> Ugly</li>
+			<li><i class="fa fa-thumbs-up"></i> Not bad</li>
+			<li><i class="fa fa-bolt"></i> Ok it's good</li>
+			<li><i class="fa fa-star"></i> Very Nice works</li>
+			<li><i class="fa fa-heart"></i> Wow how you did it</li>
+		</ul>
+	</span>
+	<span id="clock"></span>
+	<img id="graphIcon" alt="graph" src="../image/graph_icon.png" height="100px">
+	<img id="commentIcon" alt="comment" src="../image/comment_icon.png" height="100px">
+	<img id="eyeIcon" alt="comment" src="../image/eye_icon.png" height="100px">
+</span>
+<div id="modalContent"></div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+@charset "UTF-8";
+
+/* フォント指定 */
+@font-face {
+	font-family: SNsanafonKata;
+	src: url(./font/SNsanafonKata.ttf);
+}
+@font-face {
+	font-family: Fuji-Bold;
+	src: url(./font/Fuji-Bold.otf);
+}
+
+/* body要素 */
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	color: white;
+}
+
+/** bravo表示領域 */
+span#bravoPanel {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+/* bravoエフェクト描画領域 */
+canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+/* 	margin: auto; */
+	cursor: pointer; 
+}
+
+/* bravoテキスト表示領域 */
+span.bravo-text {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+}
+
+/* bravoテキスト */
+span.bravo-text span {
+	font-size: 60px;
+	font-family: Fuji-Bold;
+}
+
+/* 時計表示 */
+span#clock {
+	position: relative;
+	top: -1000px;
+}
+
+/* コメントアイコン */
+img#commentIcon, img#graphIcon, img#eyeIcon {
+	position: relative;
+	top: -1000px;
+}
+
+/* ボタン */
+.button {
+	display: inline-block;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	border-radius: 4px;
+	color: #ffffff;
+	background-image: -webkit-linear-gradient(#6795fd 0%, #67ceff 100%);
+	background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+	border-bottom: solid 3px #5e7fca;
+	font-family: Fuji-Bold;
+}
+
+/* ボタンホバー時 */
+.button:hover {
+	background-image: linear-gradient(#67aafe 0%, #67ceff 100%);
+}
+
+/* ボタン活性時 */
+.button:active {
+	-ms-transform: translateY(4px);
+	-webkit-transform: translateY(4px);
+	transform: translateY(4px);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+	border-bottom: none;
+}
+
+/* コメント */
+#comment {
+	width: 100%;
+	height: 80%;
+}
+
+/* コメント表示領域 */
+span#commentViewPanel {
+	height: 85%;
+		display: block;
+		overflow: auto;
+}
+
+/* コメントタイプ */
+.comment-type {
+	width: 10%;
+	display: inline-block;
+}
+
+/* コメント本文 */
+.comment-text {
+	width: 60%;
+	display: inline-block;
+	padding-left: 5%;
+}
+
+/* コメント投稿者 */
+.comment-user {
+	width: 20%;
+	display: inline-block;
+	padding-left: 5%;
+}
+
+/* モーダルウィンドウ閉じるボタン */
+#modal-close {
+	bottom: 10px;
+	right: 20px;
+	position: absolute;
+}
+
+
+
+span#chooseSpeakerPanel {
+	background:radial-gradient(#6f2d9c, #391353);
+	background-size:4px 4px;
+	perspective: 400px;
+	width: 100%;
+	height: 600px;
+	top: -500px;
+	position: relative;
+}
+
+.dropholder{
+	width: 322px;
+	height: 60px;
+	margin:100px auto;
+	padding:0 0 0 20px;
+	border-radius:10px;
+	font:18px arial;
+	color: #fff;
+	position: relative;
+	box-sizing:border-box;
+	border:1px solid #9b0db9;
+	animation: move 3s ease-in-out infinite;
+	position: relative;
+}
+.dropholder:hover, .dropholder:hover:after{
+	animation-play-state:paused;
+}
+.dropholder:after{
+	content:"";
+	position: absolute;
+	width: 250px;
+	height: 5px;
+	background:rgba(0,0,0, 0);
+	display: block;
+	top:100px;
+	left:37px;
+	margin: auto;
+	border-radius:50%;
+	box-shadow:0 15px 10px rgba(0,0,0, 0.4);
+	animation: moveShadow 3s ease-in-out infinite;
+}
+
+.p {
+	float: left;
+	line-height:60px;
+}
+.dropdown > .p {
+	font-size:16px;
+}
+.dropdown, .dropholder{
+	background:linear-gradient(#da4df8 ,#9b0db9);
+}
+.dropdown{
+	margin-left:20px;
+	float: left;
+	width: 208px;
+	padding:0 0 0 20px;
+	border-radius:0 10px 10px 0;
+	cursor: pointer;
+	height:58px;
+	border-left:1px solid #da4df8;
+/* 	position: relative; */
+
+	position: absolute;
+    top: -25vh;
+}
+.dropdown:hover{
+	background:linear-gradient(#da4df8 ,#b11cd0);
+}
+.dropdown:after{
+	content:"▾";
+	font-size: 18px;
+	position: absolute;
+	right:20px;
+	top:18px;
+	display: block;
+}
+
+.menu{
+	position: absolute;
+	right:0;
+	top:70px;
+	width: 228px;
+	cursor: pointer;
+	opacity:0;
+	transform-style: preserve-3d;
+	transform:rotatey(180deg) rotateX(5deg) translatey(100px);
+	backface-visibility: hidden;
+	background:linear-gradient(#4dc2f8 ,#0d82b9);
+	border:2px solid #0d82b9;
+	border-radius:10px;
+	transition:all 0.8s;
+	z-index:5;
+	overflow:hidden;
+}
+.menu li{
+	padding: 10px 10px;
+	border-bottom:1px dotted #fff;
+	color:#e8f8ff; 
+	transition:all 0.3s;
+}
+.menu li:hover{
+	background:#61ccfd;
+	padding-left:20px;
+}
+.menu li:last-child{
+	border:none;
+}
+
+.showMenu{
+	 opacity:1;
+	transform:rotateX(0deg) translatey(0px);
+}
+li > i{
+	float: left;
+	padding-top: 3px;
+	padding-right: 8px;
+}
+.p > i{
+ position: relative;
+ top:2px;
+}
+i{
+	opacity: 0.7;
+}
+@keyframes move{
+	0%, 100%{transform:translateY(-10px);}
+	50%{transform:translateY(0);}
+}
+
+@keyframes moveShadow{
+	0%,100%{transform:translateY(10px);opacity:0.4;}
+	50%{transform:translateY(0);opacity:1;}
+}
