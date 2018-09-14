@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/* フォント指定 */
+@font-face {
+	font-family: SNsanafonKata;
+	src: url(./font/SNsanafonKata.ttf);
+}
+@font-face {
+	font-family: Fuji-Bold;
+	src: url(./font/Fuji-Bold.otf);
+}
+
+/* コメント表示領域 */
+span.bravo-text {
+	display: block;
+	width: 98vw;
+	height: 90vh;
+	position: absolute;
+	top: 10px;
+}
+
+/* コメント */
+span.bravo-text span {
+	font-size: 60px;
+	font-family: Fuji-Bold;
+}
+
+/* コメント表示パネル */
+span#commentDisplayPanel {
+	width: 50vw;
+	height: 90vh;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #FFBE53;
+}
+
+/* bravoエフェクト描画領域 */
+canvas {
+	display: block;
+	width: 99vw;
+	height: 90vh;
+	margin: auto;
+/* 	cursor: pointer;  */
+}
+
+/* ボタン表示領域 */
+span#buttonPanel {
+	width: 99vw;
+	height: 7vh;
+	margin: auto;
+    display: block;
+}
+
+/* bravoボタン */
+input#bravoButton {
+	width: 50vw;
+/* 	height: 6vh; */
+	margin-top: 5px;
+/* 	bottom: 20px; */
+	font-size: 17px;
+	letter-spacing: 5px;
+}
+
+/* コメント入力欄 */
+input#comment {
+	margin-left: 1.9vw;
+	margin-top: 5px;
+	height: 5vh;
+	width: 34vw;
+}
+
+/* コメント送信ボタン */
+input#sendCommentButton {
+	margin-top: 5px;
+/* 	height: 6vh; */
+	width: 12vw;
+	font-size: 17px;
+	letter-spacing: 3px;
+}
+
+/* ボタン */
+.button {
+	display: inline-block;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	border-radius: 4px;
+	color: #ffffff;
+	background-image: -webkit-linear-gradient(#6795fd 0%, #67ceff 100%);
+	background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+	border-bottom: solid 3px #5e7fca;
+	font-family: Fuji-Bold;
+}
+
+/* ボタン活性時 */
+.button:active {
+	-ms-transform: translateY(4px);
+	-webkit-transform: translateY(4px);
+	transform: translateY(4px);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+	border-bottom: none;
+}
