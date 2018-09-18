@@ -85,6 +85,7 @@ var getAllSpeakers = function() {
             },
     		success     : function(data) {
     			console.log("success", data);
+    			resolve(data);
     		},
     		error       : function(data) {
     			alert("error!");
@@ -98,6 +99,11 @@ var getAllSpeakers = function() {
  * スピーカー選択のセレクトボックスを表示
  */
 var showSpeakerSelect = function() {
+	
+	getAllSpeakers().then((speakers) => {
+		console.log("speakers", speakers);
+	});
+	
 	$("span.dropdown").offset({
 		"top" : $(window).height() * 0.01,
 		"left" : $(window).width() * 0.03
