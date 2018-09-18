@@ -7,6 +7,7 @@ var animations = [];
 var circles = [];
 var animate;
 var modalwindowFlag = 0;
+var selectSpeakerFlag = 2;
 
 $(document).ready(function() {
 	$(".bravo-text").fadeOut(10);
@@ -74,9 +75,28 @@ $(document).ready(function() {
  * スピーカー選択のセレクトボックスを表示
  */
 var showSpeakerSelect = function() {
+	$("span.dropdown").offset({
+		"top" : $(window).height() * 0.01,
+		"left" : $(window).width() * 0.03
+	});
+	
 	$(".dropdown").click(function(){
+		
+		if ($("ul.menu").hasClass("showMenu") && selectSpeakerFlag != 2) {
+			selectSpeakerFlag = 0;
+		} else if (selectSpeakerFlag != 2) {
+			selectSpeakerFlag = 1;
+		}
+		
+		var selectOffset = $("span.dropdown").offset();
+		$("ul.menu").offset({
+			"top"  : selectOffset.top + 200,
+			"left" : selectOffset.left
+		});
+		
 		$(".menu").toggleClass("showMenu");
 		$(".menu > li").click(function(){
+			selectSpeakerFlag = 0;
 			$(".dropdown > .p").html($(this).html());
 			$(".menu").removeClass("showMenu");
 		});
@@ -316,6 +336,36 @@ function addClickListeners() {
 //	document.getElementById("bravoButton").addEventListener("click", handleEvent);
 };
 
+/**
+ * bravo情報を登録する
+ */
+var registBravo = function() {
+	
+	var sendData = {
+		"TIMESTAMP_NOW" : new Date(),
+		"AUDIENCE_ID"   : "0001"
+	};
+	
+	$.ajax({
+		contentType : "application/json; charset=utf-8",
+		data        : JSON.stringify(sendData),
+		dataType    : "json",
+		type        : 'POST',
+		url         : "https://bwb30ulzv3.execute-api.ap-northeast-1.amazonaws.com/prod/bravo_iotc_comment",
+		xhrFields: {
+            withCredentials: true
+        },
+		success     :  function (data) {
+			console.log("success", data);
+		},
+		error : function(data){
+			alert("error!");
+			console.log("error", data)
+			return event.preventDefault();
+		}
+	});
+}
+
 function handleEvent(e) {
 	
 	// アイコンの表示領域を取得
@@ -324,9 +374,18 @@ function handleEvent(e) {
 	var xEnd   = $("#eyeIcon").offset().left + $("#eyeIcon").width();
 	var yEnd   = $("#eyeIcon").offset().top + $("#eyeIcon").height();
 	
+	// スピーカー選択の表示領域を取得
+	var xStartSpeaker = $("span.dropdown").offset().left;
+	var yStartSpeaker = $("span.dropdown").offset().top;
+	var xEndSpeaker = $("span.dropdown").offset().left + $("span.dropdown").width();
+	var yEndSpeaker = $("span.dropdown").offset().top + $("span.dropdown").height();
+	
 	// アイコンの表示領域内がクリックされていたらアニメーションを起こさない
 	// モーダルウィンドウ表示時もアニメーションを起こさない
-	if ((xStart <= e.x && e.x <= xEnd) && (yStart <= e.y && e.y <= yEnd) || modalwindowFlag != 0) {
+	if ((xStart <= e.x && e.x <= xEnd) && (yStart <= e.y && e.y <= yEnd) 
+			|| (xStartSpeaker <= e.x && e.x <= xEndSpeaker) && (yStartSpeaker <= e.y && e.y <= yEndSpeaker) 
+			|| modalwindowFlag != 0 
+			|| selectSpeakerFlag != 0) {
 		return;
 	}
 	
@@ -419,6 +478,9 @@ function handleEvent(e) {
 	});
 	
 	animations.push(fillAnimation, rippleAnimation, particlesAnimation);
+	
+	// bravo情報を登録
+	registBravo();
 }
 
 function extend(a, b){
