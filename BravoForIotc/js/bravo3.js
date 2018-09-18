@@ -72,6 +72,29 @@ $(document).ready(function() {
 });
 
 /**
+ * スピーカー情報を全県取得します。
+ */
+var getAllSpeakers = function() {
+    return new Promise(function(resolve, reject){
+    	$.ajax({
+    		dataType    : "json",
+    		type        : "GET",
+    		url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/iotc_bravo_getAllSpeaker",
+    		xhrFields   : {
+                withCredentials: true
+            },
+    		success     : function(data) {
+    			console.log("success", data);
+    		},
+    		error       : function(data) {
+    			alert("error!");
+    			console.log("error", data)
+    		}
+    	});
+    });
+}
+
+/**
  * スピーカー選択のセレクトボックスを表示
  */
 var showSpeakerSelect = function() {
