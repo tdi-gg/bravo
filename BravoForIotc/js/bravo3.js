@@ -340,28 +340,24 @@ function addClickListeners() {
  * bravo情報を登録する
  */
 var registBravo = function() {
-	
-	var sendData = {
-		"TIMESTAMP_NOW" : new Date(),
-		"AUDIENCE_ID"   : "0001"
-	};
-	
 	$.ajax({
-		contentType : "application/json; charset=utf-8",
-		data        : JSON.stringify(sendData),
+		contentType : "application/json",
+		data        : JSON.stringify({
+			"AUDIENCE_ID" : "0001",
+			"TEST"        : "test"
+		}),
 		dataType    : "json",
-		type        : 'POST',
-		url         : "https://bwb30ulzv3.execute-api.ap-northeast-1.amazonaws.com/prod/bravo_iotc_comment",
-		xhrFields: {
+		type        : "POST",
+		url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/bravo_iotc_comment",
+		xhrFields   : {
             withCredentials: true
         },
-		success     :  function (data) {
+		success     : function(data) {
 			console.log("success", data);
 		},
-		error : function(data){
+		error       : function(data) {
 			alert("error!");
 			console.log("error", data)
-			return event.preventDefault();
 		}
 	});
 }
