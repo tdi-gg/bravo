@@ -130,6 +130,7 @@ textarea#comment {
 	width: 100%;
 	height: 80%;
 	font-family: Fuji-Bold;
+	margin-top: 1%;
 }
 
 textarea#comment:focus {
@@ -284,4 +285,40 @@ i{
 @keyframes moveShadow{
 	0%,100%{transform:translateY(10px);opacity:0.4;}
 	50%{transform:translateY(0);opacity:1;}
+}
+
+
+#radioPanel input {
+	display: none;
+}
+
+#radioPanel label{
+	display: block;
+	float: left;
+	cursor: pointer;
+	width: 10%;
+	margin: 0;
+	padding: 10px;
+	background: #bdc3c7;
+	color: #869198;
+	font-size: 16px;
+	text-align: center;
+	line-height: 1;
+	transition: .2s;
+}
+
+#radioPanel label:first-of-type{
+	border-radius: 3px 0 0 3px;
+}
+
+#radioPanel label:last-of-type{
+	border-radius: 0 3px 3px 0;
+}
+#radioPanel input[type="radio"]:checked + .radio-button-comment {
+	background-color: #a1b91d;
+	color: #fff;
+}
+#radioPanel input[type="radio"]:checked + .radio-button-question {
+	background-color: #e67168;
+	color: #fff;
 }
