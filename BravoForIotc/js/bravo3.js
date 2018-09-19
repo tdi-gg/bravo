@@ -192,7 +192,7 @@ var getComments = function(commentViewPanel) {
 					tr.append($("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
 					tr.append($("<td id='commentUser" + i + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
 					
-					commentTable.apped(tr);
+					commentTable.append(tr);
 					
 //					var comment = $("<span>").attr({
 //						"id"    : commentId,
