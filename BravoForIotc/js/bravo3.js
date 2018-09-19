@@ -1,14 +1,15 @@
-var c;                     // bravoアニメーション用
-var ctx;                   // bravoアニメーション用
-var cH;                    // bravoアニメーション用
-var cW;                    // bravoアニメーション用
-var bgColor = "#FF6138";   // bravo画面初期背景
-var animations = [];       // bravoアニメーション用
-var circles = [];          // bravoアニメーション用
-var animate;               // アニメーション用
-var modalwindowFlag = 0;   // モーダルウィンドウの表示中か判定
-var selectSpeakerFlag = 2; // スピーカー選択フラグ（0:選択済、1:未選択、2:初期状態）
-var selectSpeakerId = -1;  // 選択したスピーカーのID
+var c;                      // bravoアニメーション用
+var ctx;                    // bravoアニメーション用
+var cH;                     // bravoアニメーション用
+var cW;                     // bravoアニメーション用
+var bgColor    = "#FF6138"; // bravo画面初期背景
+var animations = [];        // bravoアニメーション用
+var circles    = [];        // bravoアニメーション用
+var animate;                // アニメーション用
+var modalwindowFlag   = 0;  // モーダルウィンドウの表示中か判定
+var selectSpeakerFlag = 2;  // スピーカー選択フラグ（0:選択済、1:未選択、2:初期状態）
+var selectSpeakerId   = -1; // 選択したスピーカーのID
+var selectSpeakerName = ""; // 選択したスピーカーの名前
 
 /**
  * 画面初期表示時の処理。
@@ -106,9 +107,16 @@ var showSpeakerSelect = function() {
 		var speakerSelect = $("ul.menu")[0];
 		for (var i = 0; i < speakers.length; i++) {
 			$(speakerSelect).append("<li>" 
-					+ speakers[i].SPEAKER_NAME 
+					+ "<span class='speaker-name'>" + speakers[i].SPEAKER_NAME + "</span>"
 					+ "<input type='hidden' class='speaker-id' value='" + speakers[i].SPEAKER_ID + "'>"
 					+ "</li>");
+			// 発表中のスピーカーだった場合
+			if (speakers[i].SPEAKING_FLAG == 1) {
+				selectSpeakerFlag = 0;
+				selectSpeakerId   = $($(this).find(".speaker-id")[0]).val();
+				selectSpeakerName = $($(this).find(".speaker-name")[0]).text();
+				$(".dropdown > .p").html($(this).html());
+			}
 		}
 		
 		// セレクトボックスの位置を調整
@@ -134,8 +142,9 @@ var showSpeakerSelect = function() {
 			$(".menu").toggleClass("showMenu");
 			$(".menu > li").click(function(){
 				selectSpeakerFlag = 0;
-				var temp = $(this).find(".speaker-id")[0];
-				selectSpeakerId   = $(temp).val();
+				var temp = $(this).find(".speaker-name")[0];
+				selectSpeakerId   = $($(this).find(".speaker-id")[0]).val();
+				selectSpeakerName = $($(this).find(".speaker-name")[0]).text();
 				$(".dropdown > .p").html($(this).html());
 				$(".menu").removeClass("showMenu");
 			});
@@ -353,6 +362,7 @@ var sendComment = function() {
 		contentType : "application/json",
 		data        : JSON.stringify({
 			"AUDIENCE_ID" : "0001",
+			"SPEAKER_ID"  : selectSpeakerId,
 			"COMMENT"     : comment
 		}),
 		dataType    : "json",
