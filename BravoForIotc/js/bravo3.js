@@ -157,29 +157,6 @@ var showSpeakerSelect = function() {
  */
 var getComments = function(commentViewPanel) {
 	return new Promise(function(resolve, reject) {
-		
-		$.ajax({
-			contentType : "application/json",
-			data        : JSON.stringify({
-				"AUDIENCE_ID" : "0001",
-				"SPEAKER_ID"  : selectSpeakerId
-			}),
-			dataType    : "json",
-			type        : "POST",
-			url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/iotc_bravo_registBravo",
-			xhrFields   : {
-	            withCredentials: true
-	        },
-			success     : function(data) {
-				console.log("success", data);
-			},
-			error       : function(data) {
-				alert("error!");
-				console.log("error", data)
-			}
-		});
-		
-		console.log("selectSpeakerId", selectSpeakerId);
 		$.ajax({
 			contentType : "application/json",
 			data        : JSON.stringify({
@@ -194,6 +171,22 @@ var getComments = function(commentViewPanel) {
 	        },
 			success     : function(data) {
 				console.log("success", data);
+				var comments = data.comments.Items;
+				for (var i = 0; i < comments.length; i++) {
+					var commentId = comments[i]["id"];
+					var comment = $("<span>").attr({
+						"id"    : commentId,
+						"class" : "comment"
+					});
+					commentViewPanel.append(comment);
+					
+					// コメントタイプの追加
+					comment.append($("<span id='commentType" + commentId + "' class='comment-type'>" + comments[i]["COMMENT_TYPE"] + "</span>"));
+					comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</span>"));
+					comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</span><br>"));
+				}
+				
+				resolve(commentViewPanel);
 			},
 			error       : function(data) {
 				alert("error!");
@@ -201,103 +194,103 @@ var getComments = function(commentViewPanel) {
 			}
 		});
 		
-		var comments = [
-			{
-				"id"      : "001",
-				"comment" : "comment1",
-				"user"    : "user1",
-				"type"    : "comment"
-			},
-			{
-				"id"      : "002",
-				"comment" : "comment2",
-				"user"    : "user2",
-				"type"    : "question"
-			},
-			{
-				"id"      : "003",
-				"comment" : "comment3",
-				"user"    : "user3",
-				"type"    : "comment"
-			},
-			{
-				"id"      : "004",
-				"comment" : "comment4",
-				"user"    : "user4",
-				"type"    : "question"
-			},
-			{
-				"id"      : "001",
-				"comment" : "comment1",
-				"user"    : "user1",
-				"type"    : "comment"
-			},
-			{
-				"id"      : "002",
-				"comment" : "comment2",
-				"user"    : "user2",
-				"type"    : "question"
-			},
-			{
-				"id"      : "003",
-				"comment" : "comment3",
-				"user"    : "user3",
-				"type"    : "comment"
-			},
-			{
-				"id"      : "004",
-				"comment" : "comment4",
-				"user"    : "user4",
-				"type"    : "question"
-			},
-			{
-				"id"      : "001",
-				"comment" : "comment1",
-				"user"    : "user1",
-				"type"    : "comment"
-			},
-			{
-				"id"      : "002",
-				"comment" : "comment2",
-				"user"    : "user2",
-				"type"    : "question"
-			},
-			{
-				"id"      : "003",
-				"comment" : "comment3",
-				"user"    : "user3",
-				"type"    : "comment"
-			},
-			{
-				"id"      : "004",
-				"comment" : "comment4",
-				"user"    : "user4",
-				"type"    : "question"
-			},
-			{
-				"id"      : "005",
-				"comment" : "comment5",
-				"user"    : "user5",
-				"type"    : "comment"
-			}
-		];
+//		var comments = [
+//			{
+//				"id"      : "001",
+//				"comment" : "comment1",
+//				"user"    : "user1",
+//				"type"    : "comment"
+//			},
+//			{
+//				"id"      : "002",
+//				"comment" : "comment2",
+//				"user"    : "user2",
+//				"type"    : "question"
+//			},
+//			{
+//				"id"      : "003",
+//				"comment" : "comment3",
+//				"user"    : "user3",
+//				"type"    : "comment"
+//			},
+//			{
+//				"id"      : "004",
+//				"comment" : "comment4",
+//				"user"    : "user4",
+//				"type"    : "question"
+//			},
+//			{
+//				"id"      : "001",
+//				"comment" : "comment1",
+//				"user"    : "user1",
+//				"type"    : "comment"
+//			},
+//			{
+//				"id"      : "002",
+//				"comment" : "comment2",
+//				"user"    : "user2",
+//				"type"    : "question"
+//			},
+//			{
+//				"id"      : "003",
+//				"comment" : "comment3",
+//				"user"    : "user3",
+//				"type"    : "comment"
+//			},
+//			{
+//				"id"      : "004",
+//				"comment" : "comment4",
+//				"user"    : "user4",
+//				"type"    : "question"
+//			},
+//			{
+//				"id"      : "001",
+//				"comment" : "comment1",
+//				"user"    : "user1",
+//				"type"    : "comment"
+//			},
+//			{
+//				"id"      : "002",
+//				"comment" : "comment2",
+//				"user"    : "user2",
+//				"type"    : "question"
+//			},
+//			{
+//				"id"      : "003",
+//				"comment" : "comment3",
+//				"user"    : "user3",
+//				"type"    : "comment"
+//			},
+//			{
+//				"id"      : "004",
+//				"comment" : "comment4",
+//				"user"    : "user4",
+//				"type"    : "question"
+//			},
+//			{
+//				"id"      : "005",
+//				"comment" : "comment5",
+//				"user"    : "user5",
+//				"type"    : "comment"
+//			}
+//		];
+//		
+//		// コメント一覧の作成
+//		for (var i = 0; i < comments.length; i++) {
+//			var commentId = comments[i]["id"];
+//			var comment = $("<span>").attr({
+//				"id"    : commentId,
+//				"class" : "comment"
+//			});
+//			commentViewPanel.append(comment);
+//			
+//			// コメントタイプの追加
+//			comment.append($("<span id='commentType" + commentId + "' class='comment-type'>" + comments[i]["type"] + "</span>"));
+//			comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["comment"] + "</span>"));
+//			comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["user"] + "</span><br>"));
+//		}
 		
-		// コメント一覧の作成
-		for (var i = 0; i < comments.length; i++) {
-			var commentId = comments[i]["id"];
-			var comment = $("<span>").attr({
-				"id"    : commentId,
-				"class" : "comment"
-			});
-			commentViewPanel.append(comment);
-			
-			// コメントタイプの追加
-			comment.append($("<span id='commentType" + commentId + "' class='comment-type'>" + comments[i]["type"] + "</span>"));
-			comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["comment"] + "</span>"));
-			comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["user"] + "</span><br>"));
-		}
-		
-		resolve(commentViewPanel);
+//		resolve(commentViewPanel);
 	});
 }
 
