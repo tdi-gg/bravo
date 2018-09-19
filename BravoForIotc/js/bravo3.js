@@ -189,8 +189,8 @@ var getComments = function(commentViewPanel) {
 							"<img class='comment-type-icon' alt='comment_type' src='../image/question_icon.png' height='20px'>" +
 							"</td>");
 					}
-					tr.append($("<td id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
-					tr.append($("<td id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
+					tr.append($("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
+					tr.append($("<td id='commentUser" + i + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
 					
 					commentTable.apped(tr);
 					
