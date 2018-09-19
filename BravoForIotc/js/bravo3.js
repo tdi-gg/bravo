@@ -112,6 +112,7 @@ var showSpeakerSelect = function() {
 					+ "</li>");
 			// 発表中のスピーカーだった場合
 			if (speakers[i].SPEAKING_FLAG == 1) {
+				selectSpeakerFlag = 3;
 				selectSpeakerId   = speakers[i].SPEAKER_ID;
 				selectSpeakerName = speakers[i].SPEAKER_NAME;
 				$(".dropdown > .p").html(selectSpeakerName);
@@ -481,6 +482,9 @@ function handleEvent(e) {
 			|| (xStartSpeaker <= e.x && e.x <= xEndSpeaker) && (yStartSpeaker <= e.y && e.y <= yEndSpeaker) 
 			|| modalwindowFlag != 0 
 			|| selectSpeakerFlag != 0) {
+		if (selectSpeakerFlag == 3) {
+			selectSpeakerFlag = 0;
+		}
 		return;
 	}
 	
