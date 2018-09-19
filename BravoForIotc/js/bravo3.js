@@ -8,6 +8,7 @@ var circles = [];
 var animate;
 var modalwindowFlag = 0;
 var selectSpeakerFlag = 2;
+var selectSpeakerId = -1;
 
 $(document).ready(function() {
 	$(".bravo-text").fadeOut(10);
@@ -105,7 +106,10 @@ var showSpeakerSelect = function() {
 		console.log("speakers", speakers);
 		var speakerSelect = $("ul.menu")[0];
 		for (var i = 0; i < speakers.length; i++) {
-			$(speakerSelect).append("<li>" + speakers[i].SPEAKER_NAME + "</li>");
+			$(speakerSelect).append("<li>" 
+					+ speakers[i].SPEAKER_NAME 
+					+ "<input type='hidden' class='speaker-id' value='" + speakers[i].SPEAKER_ID + "'>"
+					+ "</li>");
 		}
 		
 		$("span.dropdown").offset({
@@ -129,6 +133,8 @@ var showSpeakerSelect = function() {
 			$(".menu").toggleClass("showMenu");
 			$(".menu > li").click(function(){
 				selectSpeakerFlag = 0;
+				selectSpeakerId   = $(this).find(".speaker-id")[0].val();
+				console.log("selectSpeakerId", selectSpeakerId);
 				$(".dropdown > .p").html($(this).html());
 				$(".menu").removeClass("showMenu");
 			});
