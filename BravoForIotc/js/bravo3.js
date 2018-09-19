@@ -161,7 +161,8 @@ var getComments = function(commentViewPanel) {
 		$.ajax({
 			contentType : "application/json",
 			data        : JSON.stringify({
-				"SPEAKER_ID" : selectSpeakerId
+				"SPEAKER_ID" : selectSpeakerId,
+				"temp"       : "temp"
 			}),
 			dataType    : "json",
 			type        : "POST",
