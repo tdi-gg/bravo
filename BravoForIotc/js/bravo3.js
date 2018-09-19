@@ -102,7 +102,7 @@ var showSpeakerSelect = function() {
 	
 	getAllSpeakers().then((speakers) => {
 		console.log("speakers", speakers);
-		var size = speakers.length();
+		var size = $(speakers).length;
 		var speakerSelect = $("ul.menu")[0];
 		console.log("speakerSelect", speakerSelect);
 		console.log("$(speakerSelect)", $(speakerSelect));
