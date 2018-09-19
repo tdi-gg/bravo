@@ -297,6 +297,30 @@ var drawIcon = function() {
 			"id" : "commentPanel"
 		});
 		
+		// ラジオボタン描画領域
+		var radioPanel = $("<span>", {
+			"id" : "radioPanel"
+		});
+		commentPanel.append(radioPanel);
+		
+		// ラジオボタン
+		$("<input>").attr({
+			"type"    : "radio",
+			"id"      : "radioButtonComment",
+			"name"    : "commentType",
+			"value"   : 1,
+			"checked" : "checked"
+		}).appendTo(radioPanel);
+		radioPanel.append("<label for='radioButtonComment' class='radio-button-comment'>コメント</label>");
+
+		$("<input>").attr({
+			"type"    : "radio",
+			"id"      : "radioButtonQuestion",
+			"name"    : "commentType",
+			"value"   : 2
+		}).appendTo(radioPanel);
+		radioPanel.append("<label for='radioButtonQuestion' class='radio-button-question'>質問</label>");
+		
 		// コメント入力欄
 		$("<textarea>").attr({
 			"id"          : "comment",
@@ -313,11 +337,6 @@ var drawIcon = function() {
 			"value" : "コメント送信",
 			"onclick" : "sendComment();"
 		}).appendTo(commentPanel);
-		
-		// comment送信ボタン押下時イベントの登録
-//		$("#sendCommentButton").on("click", function() {
-//			sendComment();
-//		});
 		
 		// モーダルウィンドウでコメント画面を表示
 		windowutil.modalWindow("#modalContent", commentPanel);
@@ -357,13 +376,13 @@ var showClock = function() {
  * コメントを送信。
  */
 var sendComment = function() {
-	var comment = $("#comment").val();
 	$.ajax({
 		contentType : "application/json",
 		data        : JSON.stringify({
 			"AUDIENCE_ID" : "0001",
 			"SPEAKER_ID"  : selectSpeakerId,
-			"COMMENT"     : comment
+			"COMMENT_TYPE" : $("commentType").val(),
+			"COMMENT"     : $("#comment").val()
 		}),
 		dataType    : "json",
 		type        : "POST",
