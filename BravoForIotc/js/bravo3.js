@@ -178,7 +178,8 @@ var getComments = function(commentViewPanel) {
 				for (var i = 0; i < comments.length; i++) {
 					
 					var tr = $("<tr>", {
-						"id" : "comment" + i
+						"id"     : "comment" + i,
+						"valign" : "top"
 					});
 					
 					if (comments[i]["COMMENT_TYPE"] == 1) {
@@ -195,8 +196,8 @@ var getComments = function(commentViewPanel) {
 					tr.append($("<td id='commentUser" + i + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
 					commentTable.append(tr);
 					
-					$("td#commentType" + i).height(commentText.height());
-					$("td#commentUser" + i).height(commentText.height());
+//					$("td#commentType" + i).height(commentText.height());
+//					$("td#commentUser" + i).height(commentText.height());
 
 					console.log("type height", $("td#commentType" + i).height());
 					console.log("text height", commentText.height());
