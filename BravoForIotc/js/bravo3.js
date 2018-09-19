@@ -157,6 +157,27 @@ var showSpeakerSelect = function() {
  */
 var getComments = function(commentViewPanel) {
 	return new Promise(function(resolve, reject) {
+		
+		$.ajax({
+			contentType : "application/json",
+			data        : JSON.stringify({
+				"SPEAKER_ID" : selectSpeakerId
+			}),
+			dataType    : "json",
+			type        : "POST",
+			url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/iotc_bravo_getAllComment",
+			xhrFields   : {
+	            withCredentials: true
+	        },
+			success     : function(data) {
+				console.log("success", data);
+			},
+			error       : function(data) {
+				alert("error!");
+				console.log("error", data)
+			}
+		});
+		
 		var comments = [
 			{
 				"id"      : "001",
