@@ -171,10 +171,11 @@ var getComments = function(commentViewPanel) {
 			success     : function(data) {
 				console.log("success", data);
 				var comments = data.comments.Items;
+				var commentTable = $("<table>", {
+					"id" : "commentTable"
+				});
+				commentViewPanel.append(commentTable);
 				for (var i = 0; i < comments.length; i++) {
-					var commentTable = $("<table>", {
-						"id" : "commentTable"
-					});
 					
 					var tr = $("<tr>", {
 						"id" : "comment" + i
