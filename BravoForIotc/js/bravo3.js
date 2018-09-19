@@ -182,7 +182,7 @@ var getComments = function(commentViewPanel) {
 					});
 					
 					if (comments[i]["COMMENT_TYPE"] == 1) {
-						tr.append("<td class='comment-type'>" +
+						tr.append("<td id='commentType" + i + "' class='comment-type'>" +
 							"<img class='comment-type-icon' alt='comment_type' src='../image/comment_icon.png' height='20px'>" +
 							"</td>");
 					} else {
@@ -193,24 +193,14 @@ var getComments = function(commentViewPanel) {
 					tr.append($("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
 					tr.append($("<td id='commentUser" + i + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
 					
+					$("td#commentType" + i).height($("td#commentText" + i).height());
+					$("td#commentUser" + i).height($("td#commentText" + i).height());
+
+					console.log("type height", $("td#commentType" + i).height());
+					console.log("text height", $("td#commentText" + i).height());
+					console.log("user height", $("td#commentUser" + i).height());
+
 					commentTable.append(tr);
-					
-//					var comment = $("<span>").attr({
-//						"id"    : commentId,
-//						"class" : "comment"
-//					});
-//					commentViewPanel.append(comment);
-//					
-//					// コメントタイプの追加
-//					if (comments[i]["COMMENT_TYPE"] == 1) {
-//						comment.append("<span id='commentType" + commentId + "' class='comment-type'>" +
-//							"<img class='comment-type-icon' alt='comment_type' src='../image/comment_icon.png' height='20px'>");
-//					} else {
-//						comment.append("<span id='commentType" + commentId + "' class='comment-type'>" +
-//							"<img class='comment-type-icon' alt='comment_type' src='../image/question_icon.png' height='20px'>");
-//					}
-//					comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</span>"));
-//					comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</span><br>"));
 				}
 				
 				resolve(commentViewPanel);
