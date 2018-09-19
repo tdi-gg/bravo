@@ -135,7 +135,6 @@ var showSpeakerSelect = function() {
 				selectSpeakerFlag = 0;
 				var temp = $(this).find(".speaker-id")[0];
 				selectSpeakerId   = $(temp).val();
-				console.log("selectSpeakerId", selectSpeakerId);
 				$(".dropdown > .p").html($(this).html());
 				$(".menu").removeClass("showMenu");
 			});
@@ -384,7 +383,7 @@ var registBravo = function() {
 		contentType : "application/json",
 		data        : JSON.stringify({
 			"AUDIENCE_ID" : "0001",
-			"TEST"        : "test"
+			"SPEAKER_ID"  : selectSpeakerId
 		}),
 		dataType    : "json",
 		type        : "POST",
