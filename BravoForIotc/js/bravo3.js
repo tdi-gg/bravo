@@ -18,11 +18,6 @@ $(document).ready(function() {
 	// bravoテキストを隠す
 	$(".bravo-text").fadeOut(10);
 	
-	// comment送信ボタン押下時イベントの登録
-	$("#sendCommentButton").on("click", function() {
-		sendComment();
-	});
-	
 	// bravoアニメーション用の初期設定
 	c = document.getElementById("c");
 	ctx = c.getContext("2d");
@@ -309,6 +304,11 @@ var drawIcon = function() {
 			"value" : "コメント送信"
 		}).appendTo(commentPanel);
 		
+		// comment送信ボタン押下時イベントの登録
+		$("#sendCommentButton").on("click", function() {
+			sendComment();
+		});
+		
 		// モーダルウィンドウでコメント画面を表示
 		windowutil.modalWindow("#modalContent", commentPanel);
 	});
@@ -348,7 +348,26 @@ var showClock = function() {
  */
 var sendComment = function() {
 	var comment = $("#comment").val();
-	$("#commentDisplayPanel").append("<div>" + comment + "</div>");
+	$.ajax({
+		contentType : "application/json",
+		data        : JSON.stringify({
+			"AUDIENCE_ID" : "0001",
+			"COMMENT"     : comment
+		}),
+		dataType    : "json",
+		type        : "POST",
+		url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/bravo_iotc_comment",
+		xhrFields   : {
+            withCredentials: true
+        },
+		success     : function(data) {
+			console.log("success", data);
+		},
+		error       : function(data) {
+			alert("error!");
+			console.log("error", data)
+		}
+	});
 };
 
 /**
@@ -413,7 +432,7 @@ var registBravo = function() {
 		}),
 		dataType    : "json",
 		type        : "POST",
-		url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/bravo_iotc_comment",
+		url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/iotc_bravo_registBravo",
 		xhrFields   : {
             withCredentials: true
         },
