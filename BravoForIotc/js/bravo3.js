@@ -133,7 +133,8 @@ var showSpeakerSelect = function() {
 			$(".menu").toggleClass("showMenu");
 			$(".menu > li").click(function(){
 				selectSpeakerFlag = 0;
-				selectSpeakerId   = $(this).find(".speaker-id")[0].val();
+				var temp = $(this).find(".speaker-id")[0];
+				selectSpeakerId   = $(temp).val();
 				console.log("selectSpeakerId", selectSpeakerId);
 				$(".dropdown > .p").html($(this).html());
 				$(".menu").removeClass("showMenu");
