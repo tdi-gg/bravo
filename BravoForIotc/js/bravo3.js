@@ -161,6 +161,28 @@ var getComments = function(commentViewPanel) {
 		$.ajax({
 			contentType : "application/json",
 			data        : JSON.stringify({
+				"AUDIENCE_ID" : "0001",
+				"SPEAKER_ID"  : selectSpeakerId
+			}),
+			dataType    : "json",
+			type        : "POST",
+			url         : "https://ka5oga2jzh.execute-api.ap-northeast-1.amazonaws.com/prod/iotc_bravo_registBravo",
+			xhrFields   : {
+	            withCredentials: true
+	        },
+			success     : function(data) {
+				console.log("success", data);
+			},
+			error       : function(data) {
+				alert("error!");
+				console.log("error", data)
+			}
+		});
+		
+		console.log("selectSpeakerId", selectSpeakerId);
+		$.ajax({
+			contentType : "application/json",
+			data        : JSON.stringify({
 				"SPEAKER_ID" : selectSpeakerId,
 				"temp"       : "temp"
 			}),
@@ -401,10 +423,10 @@ var sendComment = function() {
 	$.ajax({
 		contentType : "application/json",
 		data        : JSON.stringify({
-			"AUDIENCE_ID" : "0001",
-			"SPEAKER_ID"  : selectSpeakerId,
+			"AUDIENCE_ID"  : "0001",
+			"SPEAKER_ID"   : selectSpeakerId,
 			"COMMENT_TYPE" : $("input[name='commentType']:checked").val(),
-			"COMMENT"     : $("#comment").val()
+			"COMMENT"      : $("#comment").val()
 		}),
 		dataType    : "json",
 		type        : "POST",
