@@ -1,23 +1,29 @@
-var c;
-var ctx;
-var cH;
-var cW;
-var bgColor = "#FF6138";
-var animations = [];
-var circles = [];
-var animate;
-var modalwindowFlag = 0;
-var selectSpeakerFlag = 2;
-var selectSpeakerId = -1;
+var c;                     // bravoアニメーション用
+var ctx;                   // bravoアニメーション用
+var cH;                    // bravoアニメーション用
+var cW;                    // bravoアニメーション用
+var bgColor = "#FF6138";   // bravo画面初期背景
+var animations = [];       // bravoアニメーション用
+var circles = [];          // bravoアニメーション用
+var animate;               // アニメーション用
+var modalwindowFlag = 0;   // モーダルウィンドウの表示中か判定
+var selectSpeakerFlag = 2; // スピーカー選択フラグ（0:選択済、1:未選択、2:初期状態）
+var selectSpeakerId = -1;  // 選択したスピーカーのID
 
+/**
+ * 画面初期表示時の処理。
+ * @returns
+ */
 $(document).ready(function() {
+	// bravoテキストを隠す
 	$(".bravo-text").fadeOut(10);
 	
-	// コメント送信ボタン押下時イベントの登録
+	// comment送信ボタン押下時イベントの登録
 	$("#sendCommentButton").on("click", function() {
 		sendComment();
 	});
 	
+	// bravoアニメーション用の初期設定
 	c = document.getElementById("c");
 	ctx = c.getContext("2d");
 	bgColor = "#FF6138";
@@ -39,8 +45,6 @@ $(document).ready(function() {
 	
 	resizeCanvas();
 	if (window.CP) {
-		// CodePen's loop detection was causin' problems
-		// and I have no idea why, so...
 		window.CP.PenTimer.MAX_TIME_IN_LOOP_WO_EXIT = 6000; 
 	}
 	window.addEventListener("resize", resizeCanvas);
@@ -50,13 +54,13 @@ $(document).ready(function() {
 	}
 	handleInactiveUser();
 	
-	// アイコンの表示
+	// icon表示
 	drawIcon();
 	$(window).on("resize", function(){
 		drawIcon();
 	});
 	
-	// 時計表示
+	// clock表示
 	var height = $(window).height() * 0.15;
 	var width  = $(window).width() * 0.03;
 	$("span#clock").css({
@@ -67,13 +71,13 @@ $(document).ready(function() {
 	showClock();
 	setInterval("showClock()", 1000);
 	
-	// スピーカー選択のセレクトボックスを表示
+	// speaker選択のセレクトボックスを表示
 	showSpeakerSelect();
 
 });
 
 /**
- * スピーカー情報を全県取得します。
+ * スピーカー情報を全件取得。
  */
 var getAllSpeakers = function() {
     return new Promise(function(resolve, reject){
@@ -97,10 +101,10 @@ var getAllSpeakers = function() {
 }
 
 /**
- * スピーカー選択のセレクトボックスを表示
+ * スピーカー選択のセレクトボックスを表示。
  */
 var showSpeakerSelect = function() {
-	
+	// スピーカーを全件取得。
 	getAllSpeakers().then((data) => {
 		var speakers = data.speakers;
 		console.log("speakers", speakers);
@@ -112,11 +116,13 @@ var showSpeakerSelect = function() {
 					+ "</li>");
 		}
 		
+		// セレクトボックスの位置を調整
 		$("span.dropdown").offset({
 			"top" : $(window).height() * 0.01,
 			"left" : $(window).width() * 0.03
 		});
 		
+		// セレクトボックスのクリック時イベントを登録
 		$(".dropdown").click(function() {
 			if ($("ul.menu").hasClass("showMenu") && selectSpeakerFlag != 2) {
 				selectSpeakerFlag = 0;
@@ -143,7 +149,7 @@ var showSpeakerSelect = function() {
 }
 
 /**
- * コメントを取得します。
+ * コメントを取得。
  */
 var getComments = function(commentViewPanel) {
 	return new Promise(function(resolve, reject) {
@@ -248,7 +254,7 @@ var getComments = function(commentViewPanel) {
 }
 
 /**
- * アイコンの表示をします。
+ * 各アイコンを表示。
  */
 var drawIcon = function() {
 	var height = $(window).height() * 0.15;
@@ -325,6 +331,9 @@ var drawIcon = function() {
 	});
 }
 
+/**
+ * 時計を表示。
+ */
 var showClock = function() {
 	var nowTime = new Date(); //  現在日時を得る
 	var nowHour = ("0" + nowTime.getHours()).slice(-2); // 時を抜き出す
@@ -335,13 +344,16 @@ var showClock = function() {
 }
 
 /**
- * コメントを送信します。
+ * コメントを送信。
  */
 var sendComment = function() {
 	var comment = $("#comment").val();
 	$("#commentDisplayPanel").append("<div>" + comment + "</div>");
 };
 
+/**
+ * bravoアニメーションの色の切り替え。
+ */
 var colorPicker = (function() {
 	var colors = ["#FF6138", "#FFBE53", "#2980B9", "#282741"];
 	var index = 0;
@@ -358,25 +370,39 @@ var colorPicker = (function() {
 	}
 })();
 
+/**
+ * bravoアニメーションをリセット。
+ * @param animation
+ * @returns
+ */
 function removeAnimation(animation) {
 	var index = animations.indexOf(animation);
 	if (index > -1) animations.splice(index, 1);
 }
 
+/**
+ * bravoアニメーションの描画範囲を計算。
+ * @param x
+ * @param y
+ * @returns
+ */
 function calcPageFillRadius(x, y) {
 	var l = Math.max(x - 0, cW - x);
 	var h = Math.max(y - 0, cH - y);
 	return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
 }
 
+/**
+ * クリック時イベントにbravoアニメーションを登録。
+ * @returns
+ */
 function addClickListeners() {
 	document.addEventListener("touchstart", handleEvent);
 	document.addEventListener("mousedown", handleEvent);
-//	document.getElementById("bravoButton").addEventListener("click", handleEvent);
 };
 
 /**
- * bravo情報を登録する
+ * bravo情報を登録。
  */
 var registBravo = function() {
 	$.ajax({
@@ -401,6 +427,11 @@ var registBravo = function() {
 	});
 }
 
+/**
+ * bravoアニメーションの描画。
+ * @param e
+ * @returns
+ */
 function handleEvent(e) {
 	
 	// アイコンの表示領域を取得
@@ -518,6 +549,12 @@ function handleEvent(e) {
 	registBravo();
 }
 
+/**
+ * bravoアニメーション用。
+ * @param a
+ * @param b
+ * @returns
+ */
 function extend(a, b){
 	for(var key in b) {
 		if(b.hasOwnProperty(key)) {
@@ -527,10 +564,16 @@ function extend(a, b){
 	return a;
 }
 
+/**
+ * bravoアニメーション用。
+ */
 var Circle = function(opts) {
 	extend(this, opts);
 }
 
+/**
+ * bravoアニメーション用。
+ */
 Circle.prototype.draw = function() {
 	ctx.globalAlpha = this.opacity || 1;
 	ctx.beginPath();
@@ -548,6 +591,10 @@ Circle.prototype.draw = function() {
 	ctx.globalAlpha = 1;
 }
 
+/**
+ * bravoアニメーション用。
+ * キャンバスをリサイズ。
+ */
 var resizeCanvas = function() {
 	c = document.getElementById("c");
 	cW = window.innerWidth;
@@ -557,6 +604,10 @@ var resizeCanvas = function() {
 	ctx.scale(devicePixelRatio, devicePixelRatio);
 };
 
+/**
+ * bravoアニメーション用。
+ * @returns
+ */
 function handleInactiveUser() {
 	var inactive = setTimeout(function(){
 		fauxClick(cW/2, cH/2);
@@ -572,6 +623,10 @@ function handleInactiveUser() {
 	document.addEventListener("touchstart", clearInactiveTimeout);
 }
 
+/**
+ * bravoアニメーション用。
+ * @returns
+ */
 function startFauxClicking() {
 	setTimeout(function(){
 		fauxClick(anime.random( cW * .2, cW * .8), anime.random(cH * .2, cH * .8));
@@ -579,6 +634,12 @@ function startFauxClicking() {
 	}, anime.random(200, 900));
 }
 
+/**
+ * bravoアニメーション用、
+ * @param x
+ * @param y
+ * @returns
+ */
 function fauxClick(x, y) {
 	var fauxClick = new Event("mousedown");
 	fauxClick.pageX = x;
