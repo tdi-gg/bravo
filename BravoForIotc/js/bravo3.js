@@ -193,6 +193,9 @@ var getComments = function(commentViewPanel) {
 					tr.append($("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
 					tr.append($("<td id='commentUser" + i + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
 					
+					var temp = $("td#commentType" + i);
+					var tempId = "#commentType" + i;
+					var tempSelector = $(tempId);
 					$("td#commentType" + i).height($("td#commentText" + i).height());
 					$("td#commentUser" + i).height($("td#commentText" + i).height());
 
