@@ -171,14 +171,13 @@ var getComments = function(commentViewPanel) {
 			success     : function(data) {
 				console.log("success", data);
 				var comments = data.comments.Items;
-				var commentId = comments[i]["id"];
 				for (var i = 0; i < comments.length; i++) {
 					var commentTable = $("<table>", {
 						"id" : "commentTable"
 					});
 					
 					var tr = $("<tr>", {
-						"id" : "comment" + commentId
+						"id" : "comment" + i
 					});
 					
 					if (comments[i]["COMMENT_TYPE"] == 1) {
