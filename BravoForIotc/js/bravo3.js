@@ -103,35 +103,36 @@ var showSpeakerSelect = function() {
 	getAllSpeakers().then((speakers) => {
 		console.log("speakers", speakers);
 		var speakerSelect = $("ul.menu")[0];
+		console.log("speakerSelect", speakerSelect);
+		console.log("$(speakerSelect)", $(speakerSelect));
 		for (var i = 0; i < speakers.length; i++) {
 			$(speakerSelect).append("<li>" + speakers.SPEAKER_NAME + "</li>");
 		}
-	});
-	
-	$("span.dropdown").offset({
-		"top" : $(window).height() * 0.01,
-		"left" : $(window).width() * 0.03
-	});
-	
-	$(".dropdown").click(function(){
 		
-		if ($("ul.menu").hasClass("showMenu") && selectSpeakerFlag != 2) {
-			selectSpeakerFlag = 0;
-		} else if (selectSpeakerFlag != 2) {
-			selectSpeakerFlag = 1;
-		}
-		
-		var selectOffset = $("span.dropdown").offset();
-		$("ul.menu").offset({
-			"top"  : selectOffset.top + 200,
-			"left" : selectOffset.left
+		$("span.dropdown").offset({
+			"top" : $(window).height() * 0.01,
+			"left" : $(window).width() * 0.03
 		});
 		
-		$(".menu").toggleClass("showMenu");
-		$(".menu > li").click(function(){
-			selectSpeakerFlag = 0;
-			$(".dropdown > .p").html($(this).html());
-			$(".menu").removeClass("showMenu");
+		$(".dropdown").click(function() {
+			if ($("ul.menu").hasClass("showMenu") && selectSpeakerFlag != 2) {
+				selectSpeakerFlag = 0;
+			} else if (selectSpeakerFlag != 2) {
+				selectSpeakerFlag = 1;
+			}
+			
+			var selectOffset = $("span.dropdown").offset();
+			$("ul.menu").offset({
+				"top"  : selectOffset.top + 200,
+				"left" : selectOffset.left
+			});
+			
+			$(".menu").toggleClass("showMenu");
+			$(".menu > li").click(function(){
+				selectSpeakerFlag = 0;
+				$(".dropdown > .p").html($(this).html());
+				$(".menu").removeClass("showMenu");
+			});
 		});
 	});
 }
