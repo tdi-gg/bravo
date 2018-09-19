@@ -171,22 +171,46 @@ var getComments = function(commentViewPanel) {
 			success     : function(data) {
 				console.log("success", data);
 				var comments = data.comments.Items;
+				var commentId = comments[i]["id"];
 				for (var i = 0; i < comments.length; i++) {
-					var commentId = comments[i]["id"];
-					var comment = $("<span>").attr({
-						"id"    : commentId,
-						"class" : "comment"
+					var commentTable = $("<table>", {
+						"id" : "commentTable"
 					});
-					commentViewPanel.append(comment);
 					
-					// コメントタイプの追加
+					var tr = $("<tr>", {
+						"id" : "comment" + commentId
+					});
+					
 					if (comments[i]["COMMENT_TYPE"] == 1) {
-						comment.append("<img class='comment_type' alt='comment_type' src='../image/comment_icon.png' height='20px'>");
+						tr.append("<td class='comment-type'>" +
+							"<img class='comment-type-icon' alt='comment_type' src='../image/comment_icon.png' height='20px'>" +
+							"</td>");
 					} else {
-						comment.append("<img class='comment_type' alt='comment_type' src='../image/question_icon.png' height='20px'>");
+						tr.append("<td class='comment-type'>" +
+							"<img class='comment-type-icon' alt='comment_type' src='../image/question_icon.png' height='20px'>" +
+							"</td>");
 					}
-					comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</span>"));
-					comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</span><br>"));
+					tr.append($("<td id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
+					tr.append($("<td id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
+					
+					commentTable.apped(tr);
+					
+//					var comment = $("<span>").attr({
+//						"id"    : commentId,
+//						"class" : "comment"
+//					});
+//					commentViewPanel.append(comment);
+//					
+//					// コメントタイプの追加
+//					if (comments[i]["COMMENT_TYPE"] == 1) {
+//						comment.append("<span id='commentType" + commentId + "' class='comment-type'>" +
+//							"<img class='comment-type-icon' alt='comment_type' src='../image/comment_icon.png' height='20px'>");
+//					} else {
+//						comment.append("<span id='commentType" + commentId + "' class='comment-type'>" +
+//							"<img class='comment-type-icon' alt='comment_type' src='../image/question_icon.png' height='20px'>");
+//					}
+//					comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</span>"));
+//					comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</span><br>"));
 				}
 				
 				resolve(commentViewPanel);
