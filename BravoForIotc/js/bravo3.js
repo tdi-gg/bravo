@@ -104,7 +104,7 @@ var showSpeakerSelect = function() {
 		console.log("speakers", speakers);
 		var speakerSelect = $("ul.menu")[0];
 		for (var i = 0; i < speakers.length; i++) {
-			speakerSelect.append("<li>" + speakers.SPEAKER_NAME + "</li>");
+			$(speakerSelect).append("<li>" + speakers.SPEAKER_NAME + "</li>");
 		}
 	});
 	
