@@ -183,7 +183,7 @@ var getComments = function(commentViewPanel) {
 					if (comments[i]["COMMENT_TYPE"] == 1) {
 						comment.append("<img class='comment_type' alt='comment_type' src='../image/comment_icon.png' height='20px'>");
 					} else {
-						comment.append("<img class='question_type' alt='question_type' src='../image/question_icon.png' height='20px'>");
+						comment.append("<img class='comment_type' alt='comment_type' src='../image/question_icon.png' height='20px'>");
 					}
 					comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</span>"));
 					comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</span><br>"));
