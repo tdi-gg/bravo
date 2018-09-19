@@ -64,7 +64,7 @@ $(document).ready(function() {
 	$(window).on("resize", function(){
 		drawIcon();
 		showClock();
-		showSpeakerSelect;
+		showSpeakerSelect();
 	});
 
 });
