@@ -190,20 +190,18 @@ var getComments = function(commentViewPanel) {
 							"<img class='comment-type-icon' alt='comment_type' src='../image/question_icon.png' height='20px'>" +
 							"</td>");
 					}
-					tr.append($("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
+					var commentText = $("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>");
+					tr.append(commentText);
 					tr.append($("<td id='commentUser" + i + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
+					commentTable.append(tr);
 					
-					var temp = $("td#commentType" + i);
-					var tempId = "#commentType" + i;
-					var tempSelector = $(tempId);
-					$("td#commentType" + i).height($("td#commentText" + i).height());
-					$("td#commentUser" + i).height($("td#commentText" + i).height());
+					$("td#commentType" + i).height(commentText.height());
+					$("td#commentUser" + i).height(commentText.height());
 
 					console.log("type height", $("td#commentType" + i).height());
-					console.log("text height", $("td#commentText" + i).height());
+					console.log("text height", commentText.height());
 					console.log("user height", $("td#commentUser" + i).height());
 
-					commentTable.append(tr);
 				}
 				
 				resolve(commentViewPanel);
