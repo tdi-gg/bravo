@@ -100,13 +100,11 @@ var getAllSpeakers = function() {
  */
 var showSpeakerSelect = function() {
 	
-	getAllSpeakers().then((speakers) => {
+	getAllSpeakers().then((data) => {
+		var speakers = data.speakers;
 		console.log("speakers", speakers);
-		var size = $(speakers).length;
 		var speakerSelect = $("ul.menu")[0];
-		console.log("speakerSelect", speakerSelect);
-		console.log("$(speakerSelect)", $(speakerSelect));
-		for (var i = 0; i < size; i++) {
+		for (var i = 0; i < speakers.length; i++) {
 			$(speakerSelect).append("<li>" + speakers.SPEAKER_NAME + "</li>");
 		}
 		
