@@ -52,14 +52,16 @@ span.bravo-text span {
 
 /* 時計表示 */
 span#clock {
-	position: relative;
+/* 	position: relative; */
 	top: -1000px;
+	position: absolute;
 }
 
 /* コメントアイコン */
 img#commentIcon, img#graphIcon, img#eyeIcon {
-	position: relative;
-	top: -1000px;
+/* 	position: relative; */
+/* 	top: -1000px; */
+	position: absolute;
 }
 
 /* ボタン */
@@ -149,7 +151,7 @@ span#chooseSpeakerPanel {
 	width: 100%;
 	height: 600px;
 	top: -500px;
-	position: relative;
+/* 	position: relative; */
 }
 
 .dropholder{
@@ -215,12 +217,12 @@ span#chooseSpeakerPanel {
 	background-color: #707478;
 }
 .dropdown:after{
-	content:"▾";
+	content:"  ▾";
 	font-size: 18px;
 /* 	position: absolute; */
 /* 	right:20px; */
 /* 	top:18px; */
-/* 	display: block; */
+	display: block;
 	padding-left: 10px;
 }
 

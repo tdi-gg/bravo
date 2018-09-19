@@ -57,13 +57,6 @@ $(document).ready(function() {
 	});
 	
 	// clock表示
-	var height = $(window).height() * 0.15;
-	var width  = $(window).width() * 0.03;
-	$("span#clock").css({
-		"font-size" : "50px",
-		"top"  : -height,
-		"left" : width
-	});
 	showClock();
 	setInterval("showClock()", 1000);
 	
@@ -100,6 +93,28 @@ var getAllSpeakers = function() {
  * スピーカー選択のセレクトボックスを表示。
  */
 var showSpeakerSelect = function() {
+	// セレクトボックスの位置を調整
+	var height = $(window).height() * 0.05;
+	var width  = $(window).width() * 0.03;
+	var contentHeight = $(window).height() * 0.05;
+	$("span.dropdown").css({
+		"top"         : height,
+		"left"        : width,
+		"height"      : contentHeight + "px",
+		"line-height" : contentHeight + "px"
+	});
+
+	$("span.p").css({
+		"height"        : contentHeight + "px",
+		"line-height"   : contentHeight + "px",
+		"padding-right" : $(window).width() * 0.01
+	});
+	
+	$("span.dropdown:after").css({
+		"height"      : contentHeight + "px",
+		"line-height" : contentHeight + "px"
+	});
+	
 	// スピーカーを全件取得。
 	getAllSpeakers().then((data) => {
 		var speakers = data.speakers;
@@ -118,12 +133,6 @@ var showSpeakerSelect = function() {
 				$(".dropdown > .p").html(selectSpeakerName);
 			}
 		}
-		
-		// セレクトボックスの位置を調整
-		$("span.dropdown").offset({
-			"top" : $(window).height() * 0.01,
-			"left" : $(window).width() * 0.03
-		});
 		
 		// セレクトボックスのクリック時イベントを登録
 		$(".dropdown").click(function() {
@@ -209,32 +218,33 @@ var getComments = function(commentViewPanel) {
  * 各アイコンを表示。
  */
 var drawIcon = function() {
-	var height = $(window).height() * 0.15;
-	var width  = $(window).width() * 0.6;
+	var height = $(window).height() * 0.85;
+	var width  = $(window).width() * 0.03;
+	var paddingLeft = $(window).width() * 0.01;
 	var contentHeight = $(window).height() * 0.1;
 	
-	// グラフアイコンの表示
-	$("#graphIcon").css({
-		"top"  : -height,
-		"left" : width
+	// コメント表示アイコンの表示
+	$("#eyeIcon").css({
+		"top"   : height,
+		"right" : width,
+		"padding-left" : paddingLeft
 	});
-	$("#graphIcon").height(contentHeight + "px");
+	$("#eyeIcon").height(contentHeight + "px");
 	
 	// コメントアイコンの表示
 	$("#commentIcon").css({
-		"top"  : -height,
-		"left" : width,
+		"top"  : height,
+		"right" : width + $("#eyeIcon").width() + paddingLeft,
 		"padding-left" : $(window).height() * 0.01
 	});
 	$("#commentIcon").height(contentHeight + "px");
 	
-	// コメント表示アイコンの表示
-	$("#eyeIcon").css({
-		"top"  : -height,
-		"left" : width,
-		"padding-left" : $(window).height() * 0.01
+	// グラフアイコンの表示
+	$("#graphIcon").css({
+		"top"   : height,
+		"right" : width + $("#eyeIcon").width() + paddingLeft + $("#commentIcon").width() + paddingLeft
 	});
-	$("#eyeIcon").height(contentHeight + "px");
+	$("#graphIcon").height(contentHeight + "px");
 	
 	// コメントアイコンクリック時
 	$("#commentIcon").on("click", function() {
@@ -312,6 +322,16 @@ var drawIcon = function() {
  * 時計を表示。
  */
 var showClock = function() {
+	var height = $(window).height() * 0.85;
+	var width  = $(window).width() * 0.03;
+	var contentHeight = $(window).height() * 0.08;
+	
+	$("span#clock").css({
+		"font-size" : contentHeight,
+		"top"  : height,
+		"left" : width
+	});
+	
 	var nowTime = new Date(); //  現在日時を得る
 	var nowHour = ("0" + nowTime.getHours()).slice(-2); // 時を抜き出す
 	var nowMin  = ("0" + nowTime.getMinutes()).slice(-2); // 分を抜き出す
