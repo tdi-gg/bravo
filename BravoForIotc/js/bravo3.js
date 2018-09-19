@@ -381,7 +381,7 @@ var sendComment = function() {
 		data        : JSON.stringify({
 			"AUDIENCE_ID" : "0001",
 			"SPEAKER_ID"  : selectSpeakerId,
-			"COMMENT_TYPE" : $("commentType").val(),
+			"COMMENT_TYPE" : $("input[name='commentType']:checked").val(),
 			"COMMENT"     : $("#comment").val()
 		}),
 		dataType    : "json",
