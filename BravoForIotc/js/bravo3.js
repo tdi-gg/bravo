@@ -113,9 +113,9 @@ var showSpeakerSelect = function() {
 			// 発表中のスピーカーだった場合
 			if (speakers[i].SPEAKING_FLAG == 1) {
 				selectSpeakerFlag = 0;
-				selectSpeakerId   = $($(this).find(".speaker-id")[0]).val();
-				selectSpeakerName = $($(this).find(".speaker-name")[0]).text();
-				$(".dropdown > .p").html($(this).html());
+				selectSpeakerId   = speakers[i].SPEAKER_ID;
+				selectSpeakerName = speakers[i].SPEAKER_NAME;
+				$(".dropdown > .p").html(selectSpeakerName);
 			}
 		}
 		
