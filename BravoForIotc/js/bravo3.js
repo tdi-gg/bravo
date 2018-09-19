@@ -52,16 +52,20 @@ $(document).ready(function() {
 	
 	// icon表示
 	drawIcon();
-	$(window).on("resize", function(){
-		drawIcon();
-	});
 	
 	// clock表示
 	showClock();
-	setInterval("showClock()", 1000);
+	setInterval("updateClock()", 1000);
 	
 	// speaker選択のセレクトボックスを表示
 	showSpeakerSelect();
+	
+	// resize時に再描画
+	$(window).on("resize", function(){
+		drawIcon();
+		showClock();
+		showSpeakerSelect;
+	});
 
 });
 
@@ -319,6 +323,18 @@ var drawIcon = function() {
 }
 
 /**
+ * 時計を更新する。
+ */
+var updateClock = function() {
+	var nowTime = new Date(); //  現在日時を得る
+	var nowHour = ("0" + nowTime.getHours()).slice(-2); // 時を抜き出す
+	var nowMin  = ("0" + nowTime.getMinutes()).slice(-2); // 分を抜き出す
+	var nowSec  = ("0" + nowTime.getSeconds()).slice(-2); // 秒を抜き出す
+	var msg = nowHour + ":" + nowMin + ":" + nowSec;
+	$("span#clock").text(msg);
+}
+
+/**
  * 時計を表示。
  */
 var showClock = function() {
@@ -331,13 +347,6 @@ var showClock = function() {
 		"top"  : height,
 		"left" : width
 	});
-	
-	var nowTime = new Date(); //  現在日時を得る
-	var nowHour = ("0" + nowTime.getHours()).slice(-2); // 時を抜き出す
-	var nowMin  = ("0" + nowTime.getMinutes()).slice(-2); // 分を抜き出す
-	var nowSec  = ("0" + nowTime.getSeconds()).slice(-2); // 秒を抜き出す
-	var msg = nowHour + ":" + nowMin + ":" + nowSec;
-	$("span#clock").text(msg);
 }
 
 /**
