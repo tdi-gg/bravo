@@ -98,22 +98,22 @@ span#commentViewPanel {
 
 /* コメントタイプ */
 .comment-type {
-	width: 10%;
+	width: 5%;
 	display: inline-block;
 }
 
 /* コメント本文 */
 .comment-text {
-	width: 60%;
+	width: 65%;
 	display: inline-block;
-	padding-left: 5%;
+	padding-left: 2%;
 }
 
 /* コメント投稿者 */
 .comment-user {
-	width: 20%;
+	width: 15%;
 	display: inline-block;
-	padding-left: 5%;
+	padding-left: 2%;
 }
 
 /* モーダルウィンドウ閉じるボタン */
