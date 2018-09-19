@@ -181,7 +181,11 @@ var getComments = function(commentViewPanel) {
 					commentViewPanel.append(comment);
 					
 					// コメントタイプの追加
-					comment.append($("<span id='commentType" + commentId + "' class='comment-type'>" + comments[i]["COMMENT_TYPE"] + "</span>"));
+					if (comments[i]["COMMENT_TYPE"] == 1) {
+						comment.append("<img class='comment_type_icon_' alt='comment_type' src='../image/comment_icon.png' height='20px'>");
+					} else {
+						comment.append("<img class='question_type_icon_' alt='question_type' src='../image/question_icon.png' height='20px'>");
+					}
 					comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["COMMENT"] + "</span>"));
 					comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</span><br>"));
 				}
@@ -193,104 +197,6 @@ var getComments = function(commentViewPanel) {
 				console.log("error", data)
 			}
 		});
-		
-//		var comments = [
-//			{
-//				"id"      : "001",
-//				"comment" : "comment1",
-//				"user"    : "user1",
-//				"type"    : "comment"
-//			},
-//			{
-//				"id"      : "002",
-//				"comment" : "comment2",
-//				"user"    : "user2",
-//				"type"    : "question"
-//			},
-//			{
-//				"id"      : "003",
-//				"comment" : "comment3",
-//				"user"    : "user3",
-//				"type"    : "comment"
-//			},
-//			{
-//				"id"      : "004",
-//				"comment" : "comment4",
-//				"user"    : "user4",
-//				"type"    : "question"
-//			},
-//			{
-//				"id"      : "001",
-//				"comment" : "comment1",
-//				"user"    : "user1",
-//				"type"    : "comment"
-//			},
-//			{
-//				"id"      : "002",
-//				"comment" : "comment2",
-//				"user"    : "user2",
-//				"type"    : "question"
-//			},
-//			{
-//				"id"      : "003",
-//				"comment" : "comment3",
-//				"user"    : "user3",
-//				"type"    : "comment"
-//			},
-//			{
-//				"id"      : "004",
-//				"comment" : "comment4",
-//				"user"    : "user4",
-//				"type"    : "question"
-//			},
-//			{
-//				"id"      : "001",
-//				"comment" : "comment1",
-//				"user"    : "user1",
-//				"type"    : "comment"
-//			},
-//			{
-//				"id"      : "002",
-//				"comment" : "comment2",
-//				"user"    : "user2",
-//				"type"    : "question"
-//			},
-//			{
-//				"id"      : "003",
-//				"comment" : "comment3",
-//				"user"    : "user3",
-//				"type"    : "comment"
-//			},
-//			{
-//				"id"      : "004",
-//				"comment" : "comment4",
-//				"user"    : "user4",
-//				"type"    : "question"
-//			},
-//			{
-//				"id"      : "005",
-//				"comment" : "comment5",
-//				"user"    : "user5",
-//				"type"    : "comment"
-//			}
-//		];
-//		
-//		// コメント一覧の作成
-//		for (var i = 0; i < comments.length; i++) {
-//			var commentId = comments[i]["id"];
-//			var comment = $("<span>").attr({
-//				"id"    : commentId,
-//				"class" : "comment"
-//			});
-//			commentViewPanel.append(comment);
-//			
-//			// コメントタイプの追加
-//			comment.append($("<span id='commentType" + commentId + "' class='comment-type'>" + comments[i]["type"] + "</span>"));
-//			comment.append($("<span id='commentText" + commentId + "' class='comment-text'>" + comments[i]["comment"] + "</span>"));
-//			comment.append($("<span id='commentUser" + commentId + "' class='comment-user'>" + comments[i]["user"] + "</span><br>"));
-//		}
-		
-//		resolve(commentViewPanel);
 	});
 }
 
