@@ -301,13 +301,14 @@ var drawIcon = function() {
 			"type"  : "button",
 			"id"    : "sendCommentButton",
 			"class" : "button",
-			"value" : "コメント送信"
+			"value" : "コメント送信",
+			"onclick" : "sendComment();"
 		}).appendTo(commentPanel);
 		
 		// comment送信ボタン押下時イベントの登録
-		$("#sendCommentButton").on("click", function() {
-			sendComment();
-		});
+//		$("#sendCommentButton").on("click", function() {
+//			sendComment();
+//		});
 		
 		// モーダルウィンドウでコメント画面を表示
 		windowutil.modalWindow("#modalContent", commentPanel);
