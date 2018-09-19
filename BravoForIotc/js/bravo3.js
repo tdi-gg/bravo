@@ -191,20 +191,10 @@ var getComments = function(commentViewPanel) {
 							"<img class='comment-type-icon' alt='comment_type' src='../image/question_icon.png' height='20px'>" +
 							"</td>");
 					}
-					var commentText = $("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>");
-					tr.append(commentText);
+					tr.append($("<td id='commentText" + i + "' class='comment-text'>" + comments[i]["COMMENT"] + "</td>"));
 					tr.append($("<td id='commentUser" + i + "' class='comment-user'>" + comments[i]["AUDIENCE_ID"] + "</td>"));
 					commentTable.append(tr);
-					
-//					$("td#commentType" + i).height(commentText.height());
-//					$("td#commentUser" + i).height(commentText.height());
-
-					console.log("type height", $("td#commentType" + i).height());
-					console.log("text height", commentText.height());
-					console.log("user height", $("td#commentUser" + i).height());
-
 				}
-				
 				resolve(commentViewPanel);
 			},
 			error       : function(data) {

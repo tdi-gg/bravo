@@ -100,11 +100,12 @@ span#commentViewPanel {
 .comment-type {
 	width: 5%;
 	display: inline-block;
+	text-align: center;
 }
 
 /* コメント本文 */
 .comment-text {
-	width: 65%;
+	width: 75%;
 	display: inline-block;
 	padding-left: 2%;
 }
