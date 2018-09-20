@@ -6,12 +6,13 @@
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <script src="../js/jquery-3.0.0.min.js"></script>
 <script src="../js/anime.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.7.1/less.min.js" ></script>
+<script src="../js/aws-cognito-sdk.min.js"></script>
+<script src="../js/amazon-cognito-identity.min.js"></script>
+<script src="../js/amazon-cognito-auth.min.js"></script>
 <script src="../js/windowutil.js"></script>
-<!-- <script src="../js/login.js"></script> -->
+<script src="../js/login.js"></script>
 </head>
 <body>
-<html lang="en-US">
 <head>
   <meta charset="utf-8">
     <title>Login</title>
@@ -24,14 +25,14 @@
       <img src="../image/bravo_login.png" width="100%" />
       <form name='form-login'>
         <span class="fontawesome-user"></span>
-          <input type="text" id="user" placeholder="Username">
+          <input type="text" id="userName" placeholder="Username">
        
         <span class="fontawesome-lock"></span>
-          <input type="password" id"pass" placeholder="Password">
+          <input type="password" id="password" placeholder="Password">
         
-        <input type="submit" value="Sign In">
+        <input type="button" id="signin" value="Sign In">
         <div id="signup"><a href="#">Sign Up</a></div>
-
-</form>
+	  </form>
+	</div>
 </body>
 </html>

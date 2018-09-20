@@ -83,7 +83,7 @@ after { clear: both; }
   height: 50px;
 }
 
-#login form input[type="submit"] {
+#login form #signin {
   background: #2c3338;
   border: 0;
   width: 100%;
@@ -93,7 +93,7 @@ after { clear: both; }
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
-#login form input[type="submit"]:hover {
+#login form #signin:hover {
   background: #16aa56;
 }
 
