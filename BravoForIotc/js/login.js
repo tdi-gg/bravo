@@ -1,6 +1,17 @@
 // -------------------------------------------------------------------
 // ログイン画面
 // -------------------------------------------------------------------
+'use strict';
+
+//import { CognitoUserPool, CognitoUser, AuthenticationDetails } from 'aws-cognito/amazon-cognito-identity.min.js';
+
+const poolData = {
+   	UserPoolId : 'ap-northeast-1_uNHvkMFgS',
+    ClientId : '25qn02mfvd1g9r98raaapabems'
+};
+const userPool = new AWS.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+
+
 var login = function() {
 
 	var publicScope = {
@@ -9,6 +20,12 @@ var login = function() {
 		 * 初期表示処理。
 		 */
 		init : function() {
+			
+			// Amazon Cognito 認証情報プロバイダーを初期化します
+			AWS.config.region = 'ap-northeast-1'; // リージョン
+			AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+			    IdentityPoolId: 'ap-northeast-1:7e79bd29-dacb-4c23-9f24-b88be1bb3333',
+			});
 
 			// 「Sign In」ボタン押下時
 			$("#signin").click(function(event) {
@@ -22,41 +39,57 @@ var login = function() {
 		 */
 		signIn : function() {
 			
-			// 認証データ
-			var authenticationData = {
-		        Username : $("#userName").val(),
-		        Password : $("#password").val()
-		    };
-		    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+		    var username = $('#userName').val();
+		    var password = $('#password').val();
+		    if (!username | !password) { return false; }
 		    
-		    // ユーザープールの指定
-		    var poolData = { 
-		    	UserPoolId : 'ap-northeast-1_e4iqhHG5c',
-		        ClientId : 'nf2jk74rdq92vvkf4n3brrdl9'
+		    var authenticationData = {
+		        Username: username,
+		        Password: password
 		    };
-		    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+		    		    
+		    var authenticationDetails = new AWS.Cognito.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
 		    
 		    var userData = {
-		        Username : $("#userName").val(),
-		        Pool : userPool
+		        Username: username,
+		        Pool: userPool
 		    };
-		    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+		    
+		    var message_text;
+		    var cognitoUser = new AWS.Cognito.CognitoIdentityServiceProvider.CognitoUser(userData);
 		    cognitoUser.authenticateUser(authenticationDetails, {
-		        onSuccess: function (result) {
-		            var accessToken = result.getAccessToken().getJwtToken();
-		            
-		            /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer*/
-		            var idToken = result.idToken.jwtToken;
-
-		            console.log("accessToken : " + accessToken);
-		            console.log("idToken : " + idToken);
+		        onSuccess: function(result) {
+		            console.log('access token + ' + result.getAccessToken().getJwtToken());
+		 
+		            AWS.config.region = 'ap-northeast-1';
+		            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+		                IdentityPoolId: 'ap-northeast-1:7e79bd29-dacb-4c23-9f24-b88be1bb3333',
+		                Logins: {
+		                    'cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_uNHvkMFgS': result.getIdToken().getJwtToken()
+		                }
+		            });
+		             
+		            AWS.config.credentials.refresh(function(err) {
+		                if (err) {
+		                    console.log(err);
+		                } else {
+		                    console.log("success");
+		                    console.log("id:" + AWS.config.credentials.identityId);                    
+		                }
+		 
+//		                $(location).attr('href', 'mypage.html');
+		                console.log("test");
+		            });
+		            //console.log("id:" + AWS.config.credentials.identityId);
+		             
+		            //$(location).attr('href', 'mypage.html');
 		        },
-
+		 
 		        onFailure: function(err) {
 		            alert(err);
-		        },
-
+		        }
 		    });
+
 		}
 	};
 	return publicScope;
