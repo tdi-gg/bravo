@@ -9,7 +9,7 @@ const poolData = {
    	UserPoolId : 'ap-northeast-1_uNHvkMFgS',
     ClientId : '25qn02mfvd1g9r98raaapabems'
 };
-const userPool = new AWS.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+const userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
 
 
 var login = function() {
